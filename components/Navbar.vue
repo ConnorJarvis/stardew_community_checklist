@@ -1,12 +1,11 @@
 <template>
   <div>
     <b-navbar
-      class="shadow"
-      sticky="true"
-      fixed="top"
+      class="scc-navbar"
       toggleable="lg"
       type="dark"
       variant="primary"
+      sticky
     >
       <b-navbar-brand href="#">
         Stardew Community Checklist
@@ -41,6 +40,8 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style lang="scss" scoped>
+.scc-navbar {
+	box-shadow: 0 .25rem .25rem rgba(0,0,0,.25),inset 0 -1px 5px rgba(0,0,0,.25);
+}
+</style
