@@ -7,7 +7,7 @@
       variant="primary"
       sticky
     >
-      <b-navbar-brand href="#">
+      <b-navbar-brand to="/">
         Stardew Community Checklist
       </b-navbar-brand>
 
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scc-navbar {
-	box-shadow: 0 .25rem .25rem rgba(0,0,0,.25),inset 0 -1px 5px rgba(0,0,0,.25);
-}
-</style
+  .scc-navbar {
+    box-shadow: 0 .25rem .25rem rgba(0,0,0,.25),inset 0 -1px 5px rgba(0,0,0,.25)
+  }
+</style>
