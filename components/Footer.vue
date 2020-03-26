@@ -20,8 +20,8 @@
           Developed by <a href="https://twitter.com/ConcernedApe">ConcernedApe</a>.
         </p>
         <p>
-          <a :href="gh_address"><font-awesome-icon :icon="gh_icon" /></a>
-          <a :href="reddit_address"><font-awesome-icon :icon="reddit_icon" /></a>
+          <a :href="gh_address"><github-circle /></a>
+          <a :href="reddit_address"><reddit /></a>
         </p>
       </div>
     </div>
@@ -29,8 +29,14 @@
 </template>
 
 <script>
+import GithubCircle from 'mdi-vue/GithubCircle'
+import Reddit from 'mdi-vue/Reddit'
 export default {
   name: 'AppFooter',
+  components: {
+    GithubCircle,
+    Reddit
+  },
   data () {
     return {
       gh_address: 'https://github.com/kihashi/stardew_community_checklist',
