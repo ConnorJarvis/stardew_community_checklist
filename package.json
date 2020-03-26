@@ -18,7 +18,8 @@
     "mdi-vue": "^1.4.5",
     "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vuex-persistedstate": "^3.0.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
