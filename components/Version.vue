@@ -17,7 +17,7 @@
         </b-col>
         <b-col>
           <b-button :href="release_url">
-            <github-box/> Release
+            <github-box /> Release
           </b-button>
         </b-col>
       </b-row>
