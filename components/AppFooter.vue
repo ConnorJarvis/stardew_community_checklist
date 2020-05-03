@@ -7,7 +7,9 @@
           <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
         </p>
         <p>
-          <router-link to="/changelog">Changelog</router-link>
+          <nuxt-link to="/changelog">
+            Changelog
+          </nuxt-link>
         </p>
         <p>
           Bundle and Item information is from the <a href="http://stardewvalleywiki.com/Stardew_Valley_Wiki">Stardew Valley Wiki</a>
