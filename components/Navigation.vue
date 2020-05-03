@@ -23,7 +23,7 @@
       </b-navbar-item>
       <b-navbar-item tag="div">
         <div class="buttons">
-          <b-button type="is-light" icon-left="cogs" outlined="true" />
+          <b-button type="is-light" icon-left="cogs" outlined />
         </div>
       </b-navbar-item>
     </template>
