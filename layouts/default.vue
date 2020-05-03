@@ -2,15 +2,17 @@
   <div>
     <navigation />
     <nuxt />
-    <!-- <app-footer /> -->
+    <app-footer />
   </div>
 </template>
 
 <script>
 import Navigation from '~/components/Navigation'
+import AppFooter from '~/components/AppFooter'
 export default {
   components: {
-    Navigation
+    Navigation,
+    AppFooter
   },
   data () {
     return {

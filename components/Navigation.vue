@@ -1,7 +1,7 @@
 <template>
   <b-navbar type="is-info" shadow wrapper-class="container">
     <template slot="brand">
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
         <h1 class="is-size-3 has-text-weight-semibold is-hidden-mobile">
           Stardew Community Checklist
         </h1>
@@ -12,7 +12,7 @@
     </template>
 
     <template slot="end">
-      <b-navbar-item tag="nuxt-link" to="/">
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
         Welcome
       </b-navbar-item>
       <b-navbar-item>
