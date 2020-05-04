@@ -1,7 +1,7 @@
 <template>
   <div>
     <navigation />
-    <nuxt />
+    <nuxt class="is-fullheight" />
     <app-footer />
   </div>
 </template>
@@ -28,6 +28,15 @@ export default {
           to: { name: 'inspire' }
         }
       ]
+    }
+  },
+  created () {
+    this.$store.commit('initState')
+    const v1data = localStorage.getItem('user_data')
+    if (v1data !== null && v1data !== '') {
+      this.$store.dispatch('LoadV1State', JSON.parse(atob(v1data)))
+      localStorage.removeItem('user_data')
+      localStorage.setItem('v1data', v1data)
     }
   }
 }
