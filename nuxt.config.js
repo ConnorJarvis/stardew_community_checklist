@@ -53,5 +53,8 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  router: {
+    linkActiveClass: 'is-active'
   }
 }
