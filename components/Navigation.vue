@@ -15,7 +15,7 @@
       <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
         Welcome
       </b-navbar-item>
-      <b-navbar-item>
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/bundles' }">
         Bundles
       </b-navbar-item>
       <b-navbar-item>
