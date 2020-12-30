@@ -5,14 +5,14 @@ import Bundles from '@/components/bundles/Bundles'
 import BundleItems from '@/components/bundles/BundleItems'
 import Search from '@/components/search/Search'
 import Settings from '@/components/Settings'
-import Changelog from '@/components/changelog/Changelog'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/welcome',
+      path: '/welcome/:saveid',
       name: 'Welcome',
       component: Welcome
     },
@@ -23,7 +23,7 @@ export default new Router({
       }
     },
     {
-      path: '/bundles',
+      path: '/bundles/:saveid',
       name: 'Bundles',
       component: Bundles,
       children: [
@@ -36,7 +36,7 @@ export default new Router({
     },
     {
       name: 'Search',
-      path: '/search',
+      path: '/search/:saveid',
       component: Search
     },
     // {
@@ -45,12 +45,8 @@ export default new Router({
     // },
     {
       name: 'Settings',
-      path: '/settings',
+      path: '/settings/:saveid',
       component: Settings
-    },
-    {
-      path: '/changelog',
-      component: Changelog
     }
   ],
   linkActiveClass: 'is-active'

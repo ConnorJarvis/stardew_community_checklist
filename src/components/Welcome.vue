@@ -26,11 +26,26 @@ export default {
     }
   },
   created () {
-    if (localStorage.getItem('new_visit') === null) {
-      this.ShowModal = true
-      localStorage.setItem('new_visit', 1)
+    console.log()
+    if (this.$route.params.saveid === 'new') {
+      console.log('No save ID')
+      var id = makeid(15)
+      var url = '/welcome/' + id
+      window.location.href = url
     }
+    console.log( this.$store.getters.GetSerializedState )
   }
+  
+}
+
+function makeid (length) {
+  var result = ''
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  var charactersLength = characters.length
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
 }
 </script>
 
