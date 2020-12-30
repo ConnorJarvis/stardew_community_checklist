@@ -13,7 +13,7 @@
 </template>
 
 <script>
-var socket = io('https://socket.vangel.io');
+var socket = io('https://stardew.vangel.io');
 import BundleNav from '@/components/bundles/BundleNav.vue'
 export default {
   components: {BundleNav},
@@ -22,26 +22,13 @@ export default {
     bundle: function () {
       return this.$store.getters.GetBundleById(this.$route.params.id)
     },
-    count () {
+    state() {
       return this.$store.getters.GetSerializedState
-      // Or return basket.getters.fruitsCount
-      // (depends on your design decisions).
     }
   },
   created() {
     var storeState = this.$store
-    if (this.$route.params.saveid === 'new') {
-      console.log('No save ID')
-      var id = makeid(15)
-      var url = '/welcome/' + id
-      socket.emit('new-save', {
-        id: id,
-      });
-      socket.on('saveregistered', function(data) {
-        window.location.href = url;
-      });
-      
-    } else {
+
       var id = this.$route.params.saveid;
       socket.emit('request-update', {
         id: id,
@@ -52,13 +39,10 @@ export default {
         console.log("From server " + data);
         storeState.commit('SetSerializedState', data);
       });
-      
-    }
-    // console.log( this.$store.getters.GetSerializedState )
+
   },
   watch: {
-    count (newCount, oldCount) {
-      // Our fancy notification (2).
+    state(newState, oldState) {
       console.log(`State has changed`)
       socket.emit('update', {id: this.$route.params.saveid, data: this.$store.getters.GetSerializedState })
     }

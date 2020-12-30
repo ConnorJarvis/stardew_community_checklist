@@ -113,6 +113,25 @@
     </section>
     <section class="section">
       <div class="container">
+        <h2 class="subtitle">Create New Tracker</h2>
+        <p class="content">Use this button to start a new tracker.</p>
+        <div class="field">
+          <div class="control">
+              <a href="/welcome/new">
+           <button class="button is-large is-rounded is-warning" >
+         
+              <span>
+                New Tracker
+              </span>
+          
+            </button>
+                </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
         <h2 class="subtitle">Reset Data</h2>
         <p class="content">Use this button to reset your data and start a new game.</p>
         <div class="field">
@@ -136,6 +155,7 @@
 </template>
 
 <script>
+var socket = io('https://stardew.vangel.io');
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import ButtonCheckbox from '@/components/ButtonCheckbox.vue'
 import { faCopy, faTrash, faCloudUploadAlt } from '@fortawesome/fontawesome-free-solid'
@@ -157,7 +177,24 @@ export default {
       DeleteConfirm: false
     }
   },
+  created() {
+    var storeState = this.$store
+
+      var id = this.$route.params.saveid;
+      socket.emit('request-update', {
+        id: id,
+      });
+      
+      socket.on(id, function(data) {
+        console.log("From server " + data);
+        storeState.commit('SetSerializedState', data);
+      });
+
+  },
   computed: {
+    state() {
+      return this.$store.getters.GetSerializedState
+    },
     HideCompleted: {
       get () {
         return this.$store.state.HideCompleted
@@ -233,6 +270,12 @@ export default {
       } else {
         this.DeleteConfirm = true
       }
+    }
+  },
+  watch: {
+    state(newState, oldState) {
+      console.log(`State has changed`)
+      socket.emit('update', {id: this.$route.params.saveid, data: this.$store.getters.GetSerializedState })
     }
   }
 }

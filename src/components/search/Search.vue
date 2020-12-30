@@ -14,7 +14,7 @@
 </template>
 
 <script>
-var socket = io('https://socket.vangel.io');
+var socket = io('https://stardew.vangel.io');
 import SearchForm from '@/components/search/SearchForm'
 import ItemCard from '@/components/item_card/ItemCard'
 import ItemTable from '@/components/item_table/ItemTable.vue'
@@ -57,24 +57,13 @@ export default {
     CompactView () {
       return this.$store.state.CompactView
     },
-    count () {
+    state() {
       return this.$store.getters.GetSerializedState
     }
   },
     created() {
     var storeState = this.$store
-    if (this.$route.params.saveid === 'new') {
-      console.log('No save ID')
-      var id = makeid(15)
-      var url = '/welcome/' + id
-      socket.emit('new-save', {
-        id: id,
-      });
-      socket.on('saveregistered', function(data) {
-        window.location.href = url;
-      });
-      
-    } else {
+
       var id = this.$route.params.saveid;
       socket.emit('request-update', {
         id: id,
@@ -85,12 +74,9 @@ export default {
         console.log("From server " + data);
         storeState.commit('SetSerializedState', data);
       });
-      
-    }
   },
     watch: {
-    count (newCount, oldCount) {
-      // Our fancy notification (2).
+    state(newState, oldState) {
       console.log(`State has changed`)
       socket.emit('update', {id: this.$route.params.saveid, data: this.$store.getters.GetSerializedState })
     }

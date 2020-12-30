@@ -15,7 +15,7 @@
 </template>
 
 <script>
-var socket = io('https://socket.vangel.io');
+var socket = io('https://stardew.vangel.io');
 import ItemCard from '@/components/item_card/ItemCard'
 import New from '@/components/New'
 export default {
