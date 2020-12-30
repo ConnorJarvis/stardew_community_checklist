@@ -15,6 +15,7 @@
 </template>
 
 <script>
+var socket = io('https://socket.vangel.io');
 import ItemCard from '@/components/item_card/ItemCard'
 import New from '@/components/New'
 export default {
@@ -26,14 +27,33 @@ export default {
     }
   },
   created () {
-    console.log()
+    var storeState = this.$store
     if (this.$route.params.saveid === 'new') {
       console.log('No save ID')
       var id = makeid(15)
       var url = '/welcome/' + id
-      window.location.href = url
+      socket.emit('new-save', {
+        id: id,
+      });
+      socket.on('saveregistered', function(data) {
+        window.location.href = url;
+      });
+      
+    } else {
+     
+      var id = this.$route.params.saveid;
+      socket.emit('request-update', {
+        id: id,
+      });
+      console.log(id)
+      
+      socket.on(id, function(data) {
+        console.log("From server " + data);
+        storeState.commit('SetSerializedState', data);
+      });
+      
     }
-    console.log( this.$store.getters.GetSerializedState )
+  
   }
   
 }
@@ -48,6 +68,7 @@ function makeid (length) {
   return result
 }
 </script>
+
 
 <style scoped>
 </style>

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+var socket = io('https://socket.vangel.io');
 import SearchForm from '@/components/search/SearchForm'
 import ItemCard from '@/components/item_card/ItemCard'
 import ItemTable from '@/components/item_table/ItemTable.vue'
@@ -55,6 +56,43 @@ export default {
     },
     CompactView () {
       return this.$store.state.CompactView
+    },
+    count () {
+      return this.$store.getters.GetSerializedState
+    }
+  },
+    created() {
+    var storeState = this.$store
+    if (this.$route.params.saveid === 'new') {
+      console.log('No save ID')
+      var id = makeid(15)
+      var url = '/welcome/' + id
+      socket.emit('new-save', {
+        id: id,
+      });
+      socket.on('saveregistered', function(data) {
+        window.location.href = url;
+      });
+      
+    } else {
+      var id = this.$route.params.saveid;
+      socket.emit('request-update', {
+        id: id,
+      });
+      console.log(id)
+      
+      socket.on(id, function(data) {
+        console.log("From server " + data);
+        storeState.commit('SetSerializedState', data);
+      });
+      
+    }
+  },
+    watch: {
+    count (newCount, oldCount) {
+      // Our fancy notification (2).
+      console.log(`State has changed`)
+      socket.emit('update', {id: this.$route.params.saveid, data: this.$store.getters.GetSerializedState })
     }
   },
   methods: {
@@ -109,6 +147,16 @@ export default {
     }
   }
 
+}
+
+function makeid (length) {
+  var result = ''
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  var charactersLength = characters.length
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
 }
 </script>
 
